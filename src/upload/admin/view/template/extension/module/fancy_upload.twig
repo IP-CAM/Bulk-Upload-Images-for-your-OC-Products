@@ -1,0 +1,181 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+				<button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+			<h1>{{ heading_title }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+<style>
+button, input, textarea {
+	outline:none!important;
+}
+#form-module .alert.alert-info{
+	margin-bottom:0px;
+}
+</style>
+	<div class="container-fluid">
+		{% if error_warning %}
+		<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i>&nbsp;{{ error_warning }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		{% if success %}
+		<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i>&nbsp;{{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3><h3 class="panel-title pull-right">v{{ version }}</h3>
+			</div>
+			<div class="panel-body">
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+
+			
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab-upload" data-toggle="tab">{{ tab_upload }}</a></li>
+						<li><a href="#tab-interface" data-toggle="tab">{{ tab_interface }}</a></li>
+					</ul>
+				
+					<div class="tab-content">
+
+						<div class="tab-pane active" id="tab-upload">
+						
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-path"><span data-toggle="tooltip" data-container="#tab-upload" title="{{ entry_path_help }}">{{ entry_path }}</span></label>
+								<div class="col-sm-10">
+									<input type="text" name="fancy_upload_path" value="{{ fancy_upload_path }}" placeholder="{{ entry_path }}" id="input-path" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group fu-help-block-trigger">
+								<div class="col-sm-2">
+									<button type="button" class="btn btn-primary pull-right" id="show_description">{{ text_show_description }}</button>
+								</div>
+								<div class="col-sm-10">
+								</div>
+							</div>
+							
+							<div class="form-group fu-help-block">
+								<div class="col-sm-12">
+									{{ entry_path_description }}
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span data-toggle="tooltip" data-container="#tab-upload" title="{{ entry_change_image_size_help }}">{{ entry_change_image_size }}</span></label>
+								<div class="col-sm-10">
+									<label class="radio-inline">
+										{% if fancy_upload_change_image_size %}
+										<input type="radio" name="fancy_upload_change_image_size" value="1" checked="checked" />
+										{{ text_yes }}
+										{% else %}
+										<input type="radio" name="fancy_upload_change_image_size" value="1" />
+										{{ text_yes }}
+										{% endif %}
+									</label>
+									<label class="radio-inline">
+										{% if not fancy_upload_change_image_size %}
+										<input type="radio" name="fancy_upload_change_image_size" value="0" checked="checked" />
+										{{ text_no }}
+										{% else %}
+										<input type="radio" name="fancy_upload_change_image_size" value="0" />
+										{{ text_no }}
+										{% endif %}
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-width">{{ entry_image_size }}</label>
+								<div class="col-sm-5">
+									<input type="text" name="fancy_upload_image_size_width" value="{{ fancy_upload_image_size_width }}" placeholder="{{ text_width }}" id="input-width" class="form-control" />
+								</div>
+								<div class="col-sm-5">
+									<input type="text" name="fancy_upload_image_size_height" value="{{ fancy_upload_image_size_height }}" placeholder="{{ text_height }}" id="input-height" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-exec"><span data-toggle="tooltip" data-container="#tab-interface" title="{{ entry_exec_help }}">{{ entry_exec }}</span></label>
+								<div class="col-sm-10">
+									<input type="text" name="fancy_upload_exec" value="{{ fancy_upload_exec }}" placeholder="{{ entry_exec }}" id="input-exec" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<h4><b>{{ text_current_values }}</b></h4>
+									<ul>
+										<li>max_file_uploads: {{ ini_max_file_uploads }}</li>
+										<li>max_input_time: {{ ini_max_input_time }}</li>
+										<li>post_max_size: {{ ini_post_max_size }}</li>
+										<li>upload_max_filesize: {{ ini_upload_max_filesize }}</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="tab-pane" id="tab-interface">
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-path">{{ entry_disable_confirm }}</label>
+								<div class="col-sm-10">
+									<label class="radio-inline">
+										{% if fancy_upload_disable_confirm %}
+										<input type="radio" name="fancy_upload_disable_confirm" value="1" checked="checked" />
+										{{ text_yes }}
+										{% else %}
+										<input type="radio" name="fancy_upload_disable_confirm" value="1" />
+										{{ text_yes }}
+										{% endif %}
+									</label>
+									<label class="radio-inline">
+										{% if not fancy_upload_disable_confirm %}
+										<input type="radio" name="fancy_upload_disable_confirm" value="0" checked="checked" />
+										{{ text_no }}
+										{% else %}
+										<input type="radio" name="fancy_upload_disable_confirm" value="0" />
+										{{ text_no }}
+										{% endif %}
+									</label>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+.fu-help-block {
+	display: none;
+}
+</style>
+<script>
+$(document).ready(function () {
+	$('input[name=fancy_upload_change_image_size]').on('change', function(e) {
+		let checked = Boolean(parseInt($('input[name=fancy_upload_change_image_size]:checked').val()));
+		$('input[name=fancy_upload_image_size_width], input[name=fancy_upload_image_size_height]').prop('disabled', !checked);
+	}).trigger('change');
+	
+	$('#show_description').on('click', function(e) {
+		$('.fu-help-block-trigger').hide();
+		$('.fu-help-block').show();
+	});
+});
+</script>
+{{ footer }}
