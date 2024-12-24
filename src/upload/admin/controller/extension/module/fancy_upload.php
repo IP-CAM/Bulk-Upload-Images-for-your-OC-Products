@@ -251,13 +251,13 @@ class ControllerExtensionModuleFancyUpload extends Controller {
 
 						$json['files'][$key]['name'] = $filename;
 
-						$allowed = explode(PHP_EOL, $this->config->get('config_file_ext_allowed'));
+						$allowed = array_map('trim', explode(PHP_EOL, $this->config->get('config_file_ext_allowed')));
 	
 						if (!in_array(utf8_strtolower(utf8_substr(strrchr($filename, '.'), 1)), $allowed)) {
 							$json['files'][$key]['error'] = $this->language->get('error_filetype');
 						}
 
-						$allowed = explode(PHP_EOL, $this->config->get('config_file_mime_allowed'));
+						$allowed = array_map('trim', explode(PHP_EOL, $this->config->get('config_file_mime_allowed')));
 	
 						if (!in_array($file['type'], $allowed)) {
 							$json['files'][$key]['error'] = $this->language->get('error_filetype');
