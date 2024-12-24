@@ -740,7 +740,7 @@ class ControllerExtensionModuleFancyUpload extends Controller {
 					'button_close' 			=> $this->language->get('button_close'),
 				],
 				'api' => [
-					'apiPath'				=> HTTP_SERVER . 'index.php?route=' . $this->_route,
+					'apiPath'				=> HTTPS_SERVER . 'index.php?route=' . $this->_route,
 					'methodSeparator'		=> '/',
 					'tokenKey'				=> 'user_token',
 					'token'					=> $this->session->data['user_token'],
