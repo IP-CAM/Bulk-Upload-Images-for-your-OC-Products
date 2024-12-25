@@ -12,7 +12,7 @@ class ControllerExtensionModuleFancyUpload extends Controller {
 	
 	private $_route 		= 'extension/module/fancy_upload';
 	private $_model 		= 'model_extension_module_fancy_upload';
-	private $_version 		= '1.0';
+	private $_version 		= '1.0.1';
 	
 	private $_cached		= [];
 	private $_catalog_path 	= 'catalog';
